@@ -1,0 +1,22 @@
+(define (cont-frac-iter n d k)
+  (define (iter count result)
+    (if (= count 1)
+        result
+        (iter (- count 1)
+              (/ (n (- count 1)) 
+                 (+ result (d (- count 1)))))))
+  (iter k (/ (n k) (d k))))
+
+(define (cont-frac n d k)
+  (define (iter i)
+    (if (= i 1)
+        (/ (n k) (d k))
+        (/ (n (- (+ k 1) i))
+           (+ (iter (- i 1))
+              (d (- (+ k 1) i))))))
+  (iter k))
+
+(define (frac-phi k)
+  (cont-frac (lambda (i) 1.0)
+             (lambda (i) 1.0)
+             k))
